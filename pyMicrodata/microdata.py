@@ -399,6 +399,10 @@ class MicrodataConversion(Microdata) :
 				if name in self.subs and self.subs[name] is not None :
 					for sup in self.subs[name] :
 						self.graph.add((subject, sup, value))
+				if name == "url" && subject instanceof BNode:
+					subject = URIRef(generate_URI(self.base, value.strip()))
+					self.bnodes[item] = subject 
+
 
 		# Step 10: Almost identical to step 9, except for itemprop-reverse
 		# The only difference is that a Literal value must be ignored
