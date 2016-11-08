@@ -304,5 +304,5 @@ class StructuredDataParser(Parser):
         MicrodataParser()._process(graph, baseURI, orig_source,
                                    vocab_expansion=vocab_expansion,
                                    vocab_cache=vocab_cache)
-        from .hturtle import HTurtleParser
+        from rdflib.plugins.parsers.hturtle import HTurtleParser
         HTurtleParser()._process(graph, baseURI, orig_source, media_type='text/html')
