@@ -245,7 +245,7 @@ class MicrodataParser(Parser):
 
     def _process(self, graph, baseURI, orig_source,
                  vocab_expansion=False, vocab_cache=False):
-        from .pyMicrodata import pyMicrodata
+        from __init__ import pyMicrodata
         processor = pyMicrodata(base=baseURI, vocab_expansion=vocab_expansion,
                                 vocab_cache=vocab_cache)
         processor.graph_from_source(
