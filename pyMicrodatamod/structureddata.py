@@ -51,8 +51,8 @@ def _get_orig_source(source):
 
 
 def _check_error(graph):
-    from .pyRdfa import RDFA_Error, ns_rdf
-    from .pyRdfa.options import ns_dc
+    from rdflib.plugins.parsers.pyRdfa import RDFA_Error, ns_rdf
+    from rdflib.plugins.parsers.pyRdfa.options import ns_dc
     for (s, p, o) in graph.triples((None, ns_rdf["type"], RDFA_Error)):
         for (x, y, msg) in graph.triples((s, ns_dc["description"], None)):
             raise Exception("RDFa parsing Error! %s" % msg)
@@ -155,7 +155,7 @@ class RDFaParser(Parser):
                  vocab_cache_report=False,
                  refresh_vocab_cache=False,
                  check_lite=False):
-        from .pyRdfa import pyRdfa, Options
+        from rdflib.plugins.parsers.pyRdfa import pyRdfa, Options
         from rdflib import Graph
         processor_graph = pgraph if pgraph is not None else Graph()
         self.options = Options(output_processor_graph=True,
