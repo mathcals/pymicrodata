@@ -432,7 +432,7 @@ class MicrodataConversion(Microdata) :
 				else :
 					property_list[predicate] = [ value ]
 
-				if name == "url" and isinstance(BNode, subject):
+				if name == "url" and isinstance(subject, BNode):
 					subject = URIRef(generate_URI(self.base, value.strip()))
 
 			for t in types :
