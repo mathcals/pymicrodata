@@ -365,9 +365,22 @@ class MicrodataConversion(Microdata) :
 				subject = BNode()
 			context.set_memory( item, subject )
 			
-
+		# Step 3: set the type triples if any
+		types = []
+		if item.hasAttribute("itemtype") :
+			types = item.getAttribute("itemtype").strip().split()
 		
-		
+		# Step 4, 5 and 6 to set the typing variable
+		if len(types) == 0 :
+			itype = None
+		else :
+			if is_absolute_URI(types[0]) :
+				itype = types[0]
+				context.current_name = None
+			elif context.current_type != None :
+				itype = context.current_type
+			else :
+				itype = None
 
 		# Step 7, 8, 9: Check the registry for possible keys and set the vocab
 		vocab = None
@@ -421,26 +434,11 @@ class MicrodataConversion(Microdata) :
 
 				if name == "url" and isinstance(BNode, subject):
 					subject = URIRef(generate_URI(self.base, value.strip()))
-		
-		# Step 3: set the type triples if any
-		types = []
-		if item.hasAttribute("itemtype") :
-			types = item.getAttribute("itemtype").strip().split()
+
 			for t in types :
 				if is_absolute_URI( t ) :
 					self.graph.add( (subject, ns_rdf["type"], URIRef(t)) )
-		# Step 4, 5 and 6 to set the typing variable
-		if len(types) == 0 :
-			itype = None
-		else :
-			if is_absolute_URI(types[0]) :
-				itype = types[0]
-				context.current_name = None
-			elif context.current_type != None :
-				itype = context.current_type
-			else :
-				itype = None
-
+						
 		# step 12: generate the triples
 		for property in list(property_list.keys()) :
 			self.generate_property_values( subject, URIRef(property), property_list[property], context )
