@@ -9,7 +9,7 @@ sys.path.insert(0,"/Users/ivan/Library/Python")
 # You may want to adapt this to your environment...
 import sys, getopt
 
-from pyMicrodata import pyMicrodata, __version__
+from pyMicrodatamod import pyMicrodata, __version__
 		
 ###########################################	
 

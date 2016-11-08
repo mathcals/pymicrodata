@@ -8,7 +8,7 @@ import sys
 # You may want to adapt this to your environment...
 import sys, getopt
 
-from pyMicrodata import pyMicrodata, __version__
+from pyMicrodatamod import pyMicrodata, __version__
 
 ###########################################
 
